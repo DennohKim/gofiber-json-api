@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 
+	"github.com/DennohKim/gofiber-json-api/api"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -13,18 +14,10 @@ func main(){
 
 	apiv1 := app.Group("api/v1");
 
+	apiv1.Get("/user", api.HandleGetUsers)
+	apiv1.Get("/user/:id", api.HandleGetUser)
 
-	app.Get("/foo", handleFoo)
-	apiv1.Get("/user", handleUser)
 	app.Listen(*listenAddr)
 }
 
-func handleFoo(c *fiber.Ctx) error {
-	return c.JSON(map[string]string{"msg": "Hello, World!"})
 
-}
-
-func handleUser(c *fiber.Ctx) error {
-	return c.JSON(map[string]string{"user": "Chizaa!"})
-
-}
